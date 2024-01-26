@@ -1,0 +1,17 @@
+# Binários
+*.exe
+*.dll
+*.so
+*.dylib
+
+# Arquivos de log
+*.log
+
+# Diretórios de saída de compilação
+/bin/
+/pkg/
+/out/
+
+# Arquivos de configuração permitidos apenas para efeito de estudo
+.env
+*.env.*
