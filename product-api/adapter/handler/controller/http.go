@@ -3,8 +3,8 @@ package controller
 import (
 	"net/http"
 
-	"github.com/fiap-postech-soat1-group21/product-api/product-api/adapter/model"
-	"github.com/fiap-postech-soat1-group21/product-api/product-api/internal/domain/entity"
+	"github.com/fiap-postech-soat1-group21-stage4/product-api/product-api/adapter/model"
+	"github.com/fiap-postech-soat1-group21-stage4/product-api/product-api/internal/domain/entity"
 	"github.com/gin-gonic/gin"
 	"github.com/google/uuid"
 )
@@ -46,6 +46,7 @@ func (h *Handler) Update(ctx *gin.Context) {
 		return
 	}
 	idParam := ctx.Param("id")
+
 	id, _ := uuid.Parse(idParam)
 
 	domain := &entity.Product{

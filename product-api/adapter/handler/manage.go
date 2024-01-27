@@ -1,8 +1,8 @@
 package manage
 
 import (
-	p "github.com/fiap-postech-soat1-group21/product-api/product-api/adapter/handler/controller"
-	"github.com/fiap-postech-soat1-group21/product-api/product-api/internal/domain/port"
+	p "github.com/fiap-postech-soat1-group21-stage4/product-api/product-api/adapter/handler/controller"
+	"github.com/fiap-postech-soat1-group21-stage4/product-api/product-api/internal/domain/port"
 	"github.com/gin-gonic/gin"
 )
 

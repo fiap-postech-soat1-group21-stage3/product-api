@@ -5,7 +5,7 @@ package mocks
 import (
 	context "context"
 
-	entity "github.com/fiap-postech-soat1-group21/product-api/product-api/internal/domain/entity"
+	entity "github.com/fiap-postech-soat1-group21-stage4/product-api/product-api/internal/domain/entity"
 	mock "github.com/stretchr/testify/mock"
 )
 

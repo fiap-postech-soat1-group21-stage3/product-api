@@ -6,8 +6,8 @@ import (
 	"testing"
 
 	"github.com/DATA-DOG/go-sqlmock"
-	"github.com/fiap-postech-soat1-group21/product-api/product-api/adapter/repository"
-	"github.com/fiap-postech-soat1-group21/product-api/product-api/internal/domain/entity"
+	"github.com/fiap-postech-soat1-group21-stage4/product-api/product-api/adapter/repository"
+	"github.com/fiap-postech-soat1-group21-stage4/product-api/product-api/internal/domain/entity"
 	"github.com/google/uuid"
 	"github.com/stretchr/testify/assert"
 	"gorm.io/driver/postgres"
@@ -22,6 +22,10 @@ const (
 `
 
 	updateProduct = `UPDATE "product" SET (.+) WHERE (.+)`
+
+	selectProductList = `SELECT (.+) FROM "product"`
+
+	selectCountProductList = `SELECT count(.+) FROM "product"`
 )
 
 var (
@@ -124,51 +128,64 @@ func Test_UpdateProduct(t *testing.T) {
 		})
 }
 
-// func TestFetchNotify(t *testing.T) {
-// 	t.Run("when everything goes ok, should return a notification list register", func(t *testing.T) {
-// 		db, mock, _ := sqlmock.New()
-// 		dbGorm, _ := gorm.Open(postgres.New(postgres.Config{Conn: db}))
-// 		defer db.Close()
+func TestRetrieveProduct(t *testing.T) {
+	t.Run("when everything goes ok, should return a product list", func(t *testing.T) {
+		db, mock, _ := sqlmock.New()
+		dbGorm, _ := gorm.Open(postgres.New(postgres.Config{Conn: db}))
+		defer db.Close()
 
-// 		wantRows := &entity.Customer{
-// 			ID:    uuid.MustParse("24ecd959-96fb-4394-86e9-eb8f51878bf5"),
-// 			Name:  "bia",
-// 			CPF:   "222222222",
-// 			Email: "b@email.com",
-// 		}
+		wantRows := &entity.ProductResponseList{
+			Result: []*entity.Product{
+				{
+					ID:          uuid.MustParse("24ecd959-96fb-4394-86e9-eb8f51878bf5"),
+					Name:        "hamburguer",
+					Description: "hamburger com queijo",
+					Category:    "hamburguer",
+					Price:       10,
+				},
+			},
+			Count: 1,
+		}
 
-// 		rows := sqlmock.NewRows([]string{"id", "name", "cpf", "email"}).
-// 			AddRow(
-// 				wantRows.ID,
-// 				wantRows.Name,
-// 				wantRows.CPF,
-// 				wantRows.Email,
-// 			)
+		rows := sqlmock.NewRows([]string{"id", "name", "description", "category", "price"}).
+			AddRow(
+				wantRows.Result[0].ID,
+				wantRows.Result[0].Name,
+				wantRows.Result[0].Description,
+				wantRows.Result[0].Category,
+				wantRows.Result[0].Price,
+			)
 
-// 		mock.
-// 			ExpectQuery(fetchNotification).WillReturnRows(rows)
+		countRow := sqlmock.NewRows([]string{"count"}).AddRow(1)
 
-// 		r := repository.New(dbGorm)
-// 		got, err := r.Customer.RetrieveCustomer(ctx, customer)
+		mock.
+			ExpectQuery(selectProductList).WillReturnRows(rows)
 
-// 		assert.NoError(t, err)
-// 		assert.NoError(t, mock.ExpectationsWereMet())
-// 		assert.Equal(t, wantRows, got)
-// 	})
+		mock.
+			ExpectQuery(selectCountProductList).
+			WillReturnRows(countRow)
 
-// t.Run("when db returns unmapped error, should propagate the error", func(t *testing.T) {
-// 	db, mock, _ := sqlmock.New()
-// 	dbGorm, _ := gorm.Open(postgres.New(postgres.Config{Conn: db}))
-// 	defer db.Close()
-// 	wantErr := errors.New("iamanerror")
+		r := repository.New(dbGorm)
+		got, err := r.Product.GetProducts(ctx)
 
-// 	mock.
-// 		ExpectQuery(fetchNotification).WillReturnError(wantErr)
+		assert.NoError(t, err)
+		assert.NoError(t, mock.ExpectationsWereMet())
+		assert.Equal(t, wantRows.Result, got.Result)
+	})
 
-// 	r := repository.New(dbGorm)
-// 	got, err := r.Notify.FetchNotify(ctx)
+	t.Run("when db returns unmapped error, should propagate the error", func(t *testing.T) {
+		db, mock, _ := sqlmock.New()
+		dbGorm, _ := gorm.Open(postgres.New(postgres.Config{Conn: db}))
+		defer db.Close()
+		wantErr := errors.New("iamanerror")
 
-// 	assert.ErrorIs(t, err, wantErr)
-// 	assert.Nil(t, got)
-// })
-//}
+		mock.
+			ExpectQuery(selectProductList).WillReturnError(wantErr)
+
+		r := repository.New(dbGorm)
+		got, err := r.Product.GetProducts(ctx)
+
+		assert.ErrorIs(t, err, wantErr)
+		assert.Nil(t, got)
+	})
+}

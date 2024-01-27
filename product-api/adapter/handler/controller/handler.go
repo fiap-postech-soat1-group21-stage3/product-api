@@ -1,7 +1,7 @@
 package controller
 
 import (
-	"github.com/fiap-postech-soat1-group21/product-api/product-api/internal/domain/port"
+	"github.com/fiap-postech-soat1-group21-stage4/product-api/product-api/internal/domain/port"
 	"github.com/gin-gonic/gin"
 )
 
@@ -19,6 +19,6 @@ func (h *Handler) RegisterRoutes(routes *gin.RouterGroup) {
 	productRoute := routes.Group("/product")
 	productRoute.POST("/", h.Create)
 	productRoute.GET("/", h.GetProducts)
-	productRoute.PATCH("/:id", h.Update)
+	productRoute.PUT("/:id", h.Update)
 	productRoute.DELETE("/:id", h.Delete)
 }

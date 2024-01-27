@@ -9,9 +9,9 @@ import (
 	"syscall"
 	"time"
 
-	manage "github.com/fiap-postech-soat1-group21/product-api/product-api/adapter/handler"
-	"github.com/fiap-postech-soat1-group21/product-api/product-api/adapter/repository"
-	"github.com/fiap-postech-soat1-group21/product-api/product-api/internal/domain/usecase"
+	manage "github.com/fiap-postech-soat1-group21-stage4/product-api/product-api/adapter/handler"
+	"github.com/fiap-postech-soat1-group21-stage4/product-api/product-api/adapter/repository"
+	"github.com/fiap-postech-soat1-group21-stage4/product-api/product-api/internal/domain/usecase"
 
 	"github.com/gin-gonic/gin"
 	_ "github.com/joho/godotenv/autoload"

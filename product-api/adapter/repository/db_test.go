@@ -4,7 +4,7 @@ import (
 	"os"
 	"testing"
 
-	"github.com/fiap-postech-soat1-group21/product-api/product-api/adapter/repository"
+	"github.com/fiap-postech-soat1-group21-stage4/product-api/product-api/adapter/repository"
 	"github.com/stretchr/testify/assert"
 )
 

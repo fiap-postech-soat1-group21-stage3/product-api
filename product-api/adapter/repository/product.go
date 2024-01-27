@@ -3,7 +3,7 @@ package repository
 import (
 	"context"
 
-	"github.com/fiap-postech-soat1-group21/product-api/product-api/internal/domain/entity"
+	"github.com/fiap-postech-soat1-group21-stage4/product-api/product-api/internal/domain/entity"
 	"gorm.io/gorm"
 	"gorm.io/gorm/clause"
 )

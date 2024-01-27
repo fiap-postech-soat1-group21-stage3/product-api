@@ -3,7 +3,7 @@ package port
 import (
 	"context"
 
-	"github.com/fiap-postech-soat1-group21/product-api/product-api/internal/domain/entity"
+	"github.com/fiap-postech-soat1-group21-stage4/product-api/product-api/internal/domain/entity"
 )
 
 // ProductUseCase is the interface for product repository

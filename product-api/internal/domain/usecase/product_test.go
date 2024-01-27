@@ -5,9 +5,9 @@ import (
 	"errors"
 	"testing"
 
-	"github.com/fiap-postech-soat1-group21/product-api/product-api/internal/domain/entity"
-	"github.com/fiap-postech-soat1-group21/product-api/product-api/internal/domain/port/mocks"
-	"github.com/fiap-postech-soat1-group21/product-api/product-api/internal/domain/usecase"
+	"github.com/fiap-postech-soat1-group21-stage4/product-api/product-api/internal/domain/entity"
+	"github.com/fiap-postech-soat1-group21-stage4/product-api/product-api/internal/domain/port/mocks"
+	"github.com/fiap-postech-soat1-group21-stage4/product-api/product-api/internal/domain/usecase"
 	"github.com/google/uuid"
 	"github.com/stretchr/testify/assert"
 )
