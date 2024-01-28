@@ -15,7 +15,7 @@
 
 ## O que esse projeto faz e possui
 ### O que esse projeto faz
-Através da API é possível criar um pedido e acompanhar seu status, tendo seu registro persistido no banco de dados.
+Através da API é possível criar e editar produtos.
 
 #### O que esse projeto possui
  - [x] Dockerfile e DockerCompose
