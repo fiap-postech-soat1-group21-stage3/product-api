@@ -5,7 +5,7 @@ USE restaurant;
 
 -- product
 DROP TABLE IF EXISTS product;
-CREATE TABLE customer (
+CREATE TABLE product (
 	ID  uuid DEFAULT uuid_generate_v4 (),
 	NAME VARCHAR(255) NOT NULL,
 	DESCRIPTION VARCHAR(255) NOT NULL,
